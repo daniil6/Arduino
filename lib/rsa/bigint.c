@@ -39,14 +39,28 @@
 #if PREFERE_HEAP_SPACE
 #include <stdlib.h>
 
-#define ALLOC_BIGINT_WORDS(var,words)                                      \
-    bigint_word_t *(var) = malloc((words) * sizeof(bigint_word_t));        \
-    if (!(var)) {                                                          \
-        puts_P(PSTR("\n\nDBG: OOM ERROR (in arithmeics)!\n"));             \
-        uart0_flush();                                                     \
-        for(;;)                                                            \
-            ;                                                              \
+#ifndef ONLY_ALGORITHM
+
+#define ALLOC_BIGINT_WORDS(var, words)                             \
+    bigint_word_t*(var) = malloc((words) * sizeof(bigint_word_t)); \
+    if(!(var)) {                                                   \
+        puts_P(PSTR("\n\nDBG: OOM ERROR (in arithmeics)!\n"));     \
+        uart0_flush();                                             \
+        for(;;)                                                    \
+            ;                                                      \
     }
+
+#else
+
+#define ALLOC_BIGINT_WORDS(var, words)                             \
+    bigint_word_t*(var) = malloc((words) * sizeof(bigint_word_t)); \
+    if(!(var)) {                                                   \
+        printf("\n\nDBG: OOM ERROR (in arithmeics)!\n");           \
+        for(;;)                                                    \
+            ;                                                      \
+    }
+
+#endif // ONLY_ALGORITHM
 
 #define FREE(x) free(x)
 
@@ -57,7 +71,7 @@
 
 #endif
 
-#define DEBUG 1
+#define DEBUG 0
 
 #if DEBUG
 #include "cli.h"

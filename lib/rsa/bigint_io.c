@@ -17,7 +17,9 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#ifndef ONLY_ALGORITHM
 #include "cli.h"
+#endif // ONLY_ALGORITHM
 #include "hexdigit_tab.h"
 #include "bigint.h"
 #include <stdlib.h>
@@ -25,11 +27,15 @@
 
 void bigint_print_hex(const bigint_t *a) {
 	if (a->length_W == 0) {
+#ifndef ONLY_ALGORITHM
 		cli_putc('0');
+#endif // ONLY_ALGORITHM
 		return;
 	}
 	if (a->info&BIGINT_NEG_MASK) {
+#ifndef ONLY_ALGORITHM
 		cli_putc('-');
+#endif // ONLY_ALGORITHM
 	}
 	size_t idx;
 	uint8_t print_zero = 0;
@@ -39,13 +45,17 @@ void bigint_print_hex(const bigint_t *a) {
 		x = *p >> 4;
 		y = *p & 0xf;
 		if (x != 0 || print_zero != 0) {
+#ifndef ONLY_ALGORITHM
 			cli_putc(pgm_read_byte(&hexdigit_tab_lc_P[x]));
+#endif // ONLY_ALGORITHM
 		}
 		if (x) {
 			print_zero = 1;
 		}
 		if (y != 0 || print_zero != 0) {
+#ifndef ONLY_ALGORITHM
 			cli_putc(pgm_read_byte(&hexdigit_tab_lc_P[y]));
+#endif // ONLY_ALGORITHM
 		}
 		if (y) {
 			print_zero = 1;
@@ -53,6 +63,8 @@ void bigint_print_hex(const bigint_t *a) {
 		--p;
 	}
 }
+
+#ifndef ONLY_ALGORITHM
 
 #define BLOCKSIZE 32
 
@@ -153,3 +165,5 @@ uint8_t bigint_read_hex_echo(bigint_t *a) {
 	}
 	return 0;
 }
+
+#endif // ONLY_ALGORITHM

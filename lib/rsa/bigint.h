@@ -67,6 +67,10 @@ typedef struct{
 
 /******************************************************************************/
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void   bigint_adjust(bigint_t *a);
 int32_t bigint_get_first_set_bit(const bigint_t *a);
 int32_t bigint_get_last_set_bit(const bigint_t *a);
@@ -107,5 +111,8 @@ void   bigint_expmod_u_sam(bigint_t *dest, const bigint_t *a, const bigint_t *ex
 void   bigint_expmod_u_mont_sam(bigint_t *dest, const bigint_t *a, const bigint_t *exp, const bigint_t *r);
 void   bigint_expmod_u_mont_accel(bigint_t *dest, const bigint_t *a, const bigint_t *exp, const bigint_t *r, const bigint_t *m_);
 
+#ifdef __cplusplus
+}
+#endif
 
 #endif /*BIGINT_H_*/
