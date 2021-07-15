@@ -17,13 +17,14 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef ONLY_ALGORITHM
-#include "cli.h"
-#endif // ONLY_ALGORITHM
 #include "hexdigit_tab.h"
 #include "bigint.h"
 #include <stdlib.h>
 #include <string.h>
+
+#ifndef ONLY_ALGORITHM
+#include "cli.h"
+#endif // ONLY_ALGORITHM
 
 void bigint_print_hex(const bigint_t *a) {
 	if (a->length_W == 0) {

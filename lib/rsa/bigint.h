@@ -25,6 +25,10 @@
  * 
  */
 
+#ifndef ONLY_ALGORITHM
+#define ONLY_ALGORITHM
+#endif
+
 #ifndef BIGINT_H_
 #define BIGINT_H_
 
